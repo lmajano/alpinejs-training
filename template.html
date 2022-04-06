@@ -10,15 +10,5 @@
 <body>
     <style>
     </style>
-
-    <form
-        x-data="{ name : '' }"
-        x-on:submit.prevent="alert( `${name} was submitted` )"
-    >
-        <input type="text" x-model="name">
-        <button type="submit" :disabled="name.length > 2 ? false : true">Submit it!</button>
-    </form>
-
-
 </body>
 </html>
