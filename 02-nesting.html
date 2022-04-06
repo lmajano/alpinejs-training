@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+  <body>
+
+    <!--
+    Any element can become an Alpine Component.
+    You can have global components via the Alpine.store() approach.
+    -->
+    <div x-data = "{
+        // Contain reactive properties, functions, or expressions
+        hello : 'luis'
+    }">
+
+        <div x-data="{
+            open : true,
+            toggle(){
+                this.open = !this.open
+            }
+        }">
+            <span x-text="hello" x-show="open"></span>
+            <button x-on:click="toggle">Toggle</button>
+        </div>
+
+    </div>
+
+  </body>
+</html>

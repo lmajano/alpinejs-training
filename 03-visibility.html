@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+
+    <!-- <div x-data="{ visible : true }">
+        <div x-show="visible">Hola from Atlanta!</div>
+    </div> -->
+
+    <!-- <div x-data="{ data : [ 1,2,3,4 ] }">
+        <div x-show="data.length">We found some data!</div>
+    </div> -->
+
+    <div x-data="{ data : 0 }">
+
+        <span x-text="data"></span>
+        <button x-on:click="data++">+</button>
+        <button x-on:click="data--">-</button>
+
+        <!--
+            x-if is ONLY applied to template tags, so we can track them
+            and remove them later. The main difference is that
+            it completely adds and removes the element instead of applying css magic
+         -->
+        <template x-if="data > 10">
+            <h1>WOW! This is a big Number!</h1>
+        </template>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+    <style>
+        .bold { font-weight: bold }
+        .green { color: greenyellow }
+    </style>
+
+    <!--
+        Binding is a great way to bind dynamic/reactive values to HTML attributes
+     -->
+
+     <!-- <div x-data>
+        <span
+            class="green"
+        	x-bind:class="{ 'bold' : false }"
+            >
+            I am super bold!
+        </span>
+    </div> -->
+
+    <!-- Shortcut to bind just like vue-js and dynamic binding-->
+
+    <!-- <div x-data="{ selected : false }">
+        <span
+            class="green"
+        	:class="{ 'bold' : selected }"
+            >
+            I am super bold!
+        </span>
+
+        <button x-on:click="selected = true">Make it bold!</button>
+    </div> -->
+
+    <form x-data="{ name : '' }">
+        <input type="text" x-model="name">
+        <button type="submit" :disabled="name.length > 2 ? false : true">Submit it!</button>
+    </form>
+
+
+</body>
+</html>
