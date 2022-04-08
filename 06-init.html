@@ -8,17 +8,21 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
-    <style>
-    </style>
 
-    <form
-        x-data="{ name : '' }"
-        x-on:submit.prevent="alert( `${name} was submitted` )"
-    >
-        <input type="text" x-model="name">
-        <button type="submit" :disabled="name.length > 2 ? false : true">Submit it!</button>
-    </form>
-
+    <div x-data="{
+        progress : 0,
+        init(){
+            let interval = setInterval(() => {
+                //if( this.progress >= 100 ) clearInterval( interval);
+                this.progress = this.progress + 5
+            }, 200);
+        }
+    }">
+        <progress max="100" :value="progress">
+            <span x-text="`${progress}%`"></span>
+        </progress>
+        <button @click="progress=0">Restart</button>
+    </div>
 
 </body>
 </html>

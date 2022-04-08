@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+
+    <!--
+        Looping over arrays, lists, objects
+        https://alpinejs.dev/directives/for
+
+        In order for alpine to track the dom, use the <template> tag for the repeatable UI
+     -->
+
+     <!-- Simple array representation -->
+     <div
+        class="vstack gap-3"
+        x-data="{ people : [ 'luis', 'brad', 'grant', 'michael' ] }"
+    >
+        <template x-for="person in people">
+            <div class="border p-1 bg-light" x-text="person"></div>
+        </template>
+     </div>
+
+     <hr class="my-5">
+
+     <!-- Let's add an index -->
+     <div
+        class="vstack gap-3"
+        x-data="{ people : [ 'luis', 'brad', 'grant', 'michael' ] }"
+    >
+        <template x-for="person, index in people">
+            <div class="border p-1 bg-light" x-text="`${index+1}. ${person}`"></div>
+        </template>
+     </div>
+
+     <hr class="my-5">
+
+     <!-- Let's add records -->
+     <div
+        class="vstack gap-3"
+        x-data="{
+            people : [
+                { id : 1, name : 'Luis' },
+                { id : 2, name : 'Brad' },
+                { id : 3, name : 'Michael' },
+                { id : 4, name : 'Grant' },
+            ],
+
+            init(){
+                // go fetch some records!!
+            }
+        }"
+    >
+        <!-- key is the unique reference for the row so the dom can follow -->
+        <template x-for="person, index in people" :key="person.id">
+            <div class="border p-1 bg-light">
+                <span x-text="index+1"></span>.
+                <span x-text="person.name"></span>
+                (<span x-text="person.id"></span>)
+            </div>
+        </template>
+     </div>
+
+</body>
+</html>
