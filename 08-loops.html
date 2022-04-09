@@ -16,6 +16,17 @@
         In order for alpine to track the dom, use the <template> tag for the repeatable UI
      -->
 
+     <!-- Iterate over a range -->
+     <div x-data>
+        <ul>
+            <template x-for="i in 10">
+                <li x-text="i"></li>
+            </template>
+        </ul>
+     </div>
+
+     <hr class="my-5">
+
      <!-- Simple array representation -->
      <div
         class="vstack gap-3"
@@ -44,6 +55,8 @@
      <div
         class="vstack gap-3"
         x-data="{
+            newPerson : '',
+
             people : [
                 { id : 1, name : 'Luis' },
                 { id : 2, name : 'Brad' },
@@ -53,15 +66,33 @@
 
             init(){
                 // go fetch some records!!
+            },
+
+            add(){
+                // Call Server
+                this.people.push( {
+                    id : this.people[ this.people.length - 1 ].id + 1,
+                    name : this.newPerson
+                } );
+                this.newPerson = ''
+            },
+
+            remove( index ){
+                // Call Server
+                this.people.splice( index, 1 );
             }
         }"
     >
+        <input type="text" x-model="newPerson" placeholder="Add new person">
+        <button @click="add" :disabled="newPerson.length === 0">Add</button>
+
         <!-- key is the unique reference for the row so the dom can follow -->
         <template x-for="person, index in people" :key="person.id">
             <div class="border p-1 bg-light">
                 <span x-text="index+1"></span>.
                 <span x-text="person.name"></span>
                 (<span x-text="person.id"></span>)
+                <button class="float-end" @click="remove( index )">X</button>
             </div>
         </template>
      </div>
