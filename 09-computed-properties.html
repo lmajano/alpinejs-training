@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+
+    <!-- Simple Example -->
+    <div x-data="{
+        message : '',
+
+        get shoutGreeting(){
+            return `${this.message.toUpperCase()}`
+        }
+     }">
+        <input type="text" x-model="message">
+        <span x-text="shoutGreeting"></span>
+    </div>
+
+    <hr class="my-5">
+
+     <!-- Computed Array -->
+     <div
+        class="vstack gap-3"
+        x-data="{
+            newPerson : '',
+
+            people : [
+                { id : 1, name : 'Luis' },
+                { id : 2, name : 'Brad' },
+                { id : 3, name : 'Michael' },
+                { id : 4, name : 'Grant' }
+            ],
+
+            get sortedPeople(){
+                return this.people.sort( (a,b) => a.name > b.name );
+            },
+
+            init(){
+                // go fetch some records!!
+            },
+
+            get maxId(){
+                let sortedById = this.people.sort( (a,b) => a.id - b.id );
+                return sortedById[ sortedById.length-1 ].id;
+            },
+
+            add(){
+                // Call Server
+                this.people.push( {
+                    id : this.maxId + 1,
+                    name : this.newPerson
+                } );
+                this.newPerson = ''
+            },
+
+            remove( index ){
+                // Call Server
+                this.people.splice( index, 1 );
+            }
+        }"
+    >
+        <input type="text" x-model="newPerson" placeholder="Add new person">
+        <button @click="add" :disabled="newPerson.length === 0">Add</button>
+
+        <!-- key is the unique reference for the row so the dom can follow -->
+        <template x-for="person, index in sortedPeople" :key="person.id">
+            <div class="border p-1 bg-light">
+                <span x-text="index+1"></span>.
+                <span x-text="person.name"></span>
+                (<span x-text="person.id"></span>)
+                <button class="float-end" @click="remove( index )">X</button>
+            </div>
+        </template>
+     </div>
+
+</body>
+</html>
