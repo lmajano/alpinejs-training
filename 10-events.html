@@ -20,7 +20,7 @@
     <!-- @shortcut -->
     <button x-data @click="alert( 'Hello World' )">Hello</button>
 
-    <!-- $event object -->
+    <!-- $event, $el object -->
     <button x-data @click="console.log( $event )">Event Object</button>
     <button
     	x-data
@@ -28,6 +28,13 @@
     	message="Hola Luis"
     >
         It's Magic
+    </button>
+    <button
+    	x-data
+    	@click="alert( $el.getAttribute( 'message' ) )"
+    	message="Hola Luis"
+    >
+        Same Dom
     </button>
 
     <hr class="my-5">
@@ -109,7 +116,7 @@
         <div
         	x-show="message"
         	x-text="message"
-            @click.outside="clearMessage                                                                                                                                                                                                                                                                      "
+            @click.outside="clearMessage"                                                                                                                                                                                                                                                                     "
         	class="alert alert-info"></div>
 
         <div>
