@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<style>
+    .modal-wrapper{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: gray;
+    }
+    .modal-inner{
+        width: 100%;
+        max-width: 30%;
+        background-color: white;
+        padding:20px
+    }
+    [x-cloak] { display: none !important; }
+</style>
+<body>
+
+    <!--
+        Custom Events
+        https://alpinejs.dev/essentials/events
+
+        Great way to interact with components that are not nested
+     -->
+
+     <div
+        class="modal-wrapper"
+        x-data="{
+            open : false,
+            message : '',
+            openModal( message ){
+                this.open = true
+                this.message = message
+            }
+        }"
+        x-cloak
+        x-show="open"
+        @open-modal.window="openModal( $event.detail.message )"
+        @keyup.escape.window="open=false"
+     >
+        <div
+            class="modal-inner"
+            @click.outside="open = false"
+        >
+            <button
+                class="float-end"
+                @click="open=false"
+                >
+            X
+            </button>
+            <span x-text="message"></span>
+        </div>
+     </div>
+
+     <button x-data @click="$dispatch( 'open-modal', { message : 'What a beautiful message'} )">Open Modal</button>
+
+</body>
+</html>
